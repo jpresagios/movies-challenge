@@ -15,14 +15,26 @@
         },
         "ecmaVersion": 13,
         "sourceType": "module",
-        "project": ["./tsconfig.json"]
+        "project": [
+            "./tsconfig.json"
+        ]
     },
     "plugins": [
         "react",
         "@typescript-eslint",
         "import"
     ],
-    "rules": {        
+    "rules": {
+        "no-underscore-dangle":  ["error", { "allow": ["_id"] }],     
+        "no-param-reassign": [
+            "error",
+            {
+                "props": true,
+                "ignorePropertyModificationsFor": [
+                    "state"
+                ]
+            }
+        ],
         "react/jsx-filename-extension": [
             2,
             {
@@ -33,6 +45,6 @@
                     ".tsx"
                 ]
             }
-        ]    
+        ]
     }
 }
