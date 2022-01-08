@@ -4,6 +4,7 @@ import {
 } from '@material-ui/pickers';
 import React from 'react';
 
+import SearchRounded from '@material-ui/icons/SearchRounded';
 import DateFnsUtils from '@date-io/date-fns';
 
 import {
@@ -12,6 +13,7 @@ import {
   TextField,
   MenuItem,
   Modal,
+  IconButton,
 } from '@material-ui/core';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -48,15 +50,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-interface MovieSearchProps {
-  openModal: boolean;
-  handleClose: () => void;
-}
-
-export default function MovieSearch({ openModal, handleClose }: MovieSearchProps) {
+export default function MovieSearch() {
   const classes = useStyles();
   const { searchFields } = useSelector(moviesSelector);
   const dispatch = useDispatch();
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const onRequestTypeChange = (e: any) => {
     const { value } = e.target;
@@ -68,60 +75,74 @@ export default function MovieSearch({ openModal, handleClose }: MovieSearchProps
   };
 
   return (
-    <Modal
-      open={openModal}
-      className={classes.modal}
-      onClose={handleClose}
-    >
-      <div className={classes.paper}>
-        <h2>Search movies</h2>
-        <form noValidate autoComplete="off">
-          <Grid
-            container
-            item
-            spacing={3}
-            direction="column"
-            justifyContent="center"
+    <>
+      <Grid container justifyContent="flex-end">
+        <IconButton arial-label="filter-drawer" onClick={handleOpen}>
+          <span
+            style={{
+              fontSize: 15,
+              marginRight: 6,
+            }}
           >
-            <Grid item>
-              <FormControl variant="outlined" fullWidth>
-                <TextField
-                  select
-                  label="Select category"
-                  variant="outlined"
-                  fullWidth
-                  value={searchFields.type}
-                  onChange={onRequestTypeChange}
-                  name="type"
-                >
-                  <MenuItem value="series">Serie</MenuItem>
-                  <MenuItem value="movie">Movie</MenuItem>
-                </TextField>
-              </FormControl>
+            Search your favorities movies
+          </span>
+          <SearchRounded />
+        </IconButton>
+      </Grid>
 
+      <Modal open={open} className={classes.modal} onClose={handleClose}>
+        <div className={classes.paper}>
+          <h2>Search movies</h2>
+          <form noValidate autoComplete="off">
+            <Grid
+              container
+              item
+              spacing={3}
+              direction="column"
+              justifyContent="center"
+            >
+              <Grid item>
+                <FormControl variant="outlined" fullWidth>
+                  <TextField
+                    select
+                    label="Select category"
+                    variant="outlined"
+                    fullWidth
+                    value={searchFields.type}
+                    onChange={onRequestTypeChange}
+                    name="type"
+                  >
+                    <MenuItem value="series">Serie</MenuItem>
+                    <MenuItem value="movie">Movie</MenuItem>
+                  </TextField>
+                </FormControl>
+              </Grid>
+
+              <Grid item>
+                <FormControl variant="outlined" fullWidth>
+                  <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                    <KeyboardDatePicker
+                      disableToolbar
+                      variant="inline"
+                      format="yyyy"
+                      margin="normal"
+                      value={
+                        searchFields.year
+                          ? new Date(searchFields.year, 0)
+                          : null
+                      }
+                      maxDate={new Date()}
+                      onChange={onRequestYearChange}
+                      name="year"
+                      views={['year']}
+                    />
+                  </MuiPickersUtilsProvider>
+                </FormControl>
+              </Grid>
             </Grid>
-
-            <Grid item>
-              <FormControl variant="outlined" fullWidth>
-                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                  <KeyboardDatePicker
-                    disableToolbar
-                    variant="inline"
-                    format="yyyy"
-                    margin="normal"
-                    value={searchFields.year ? new Date(searchFields.year, 0) : null}
-                    maxDate={new Date()}
-                    onChange={onRequestYearChange}
-                    name="year"
-                    views={['year']}
-                  />
-                </MuiPickersUtilsProvider>
-
-              </FormControl>
-            </Grid>
-          </Grid>
-        </form>
-      </div>
-    </Modal>
+          </form>
+        </div>
+      </Modal>
+    </>
   );
 }
