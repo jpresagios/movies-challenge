@@ -16,7 +16,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-function MovieItem({ title, description, url }: MovieProps) {
+export default function MovieItem({ title, description, url }: MovieProps) {
   const classes = useStyles();
 
   return (
@@ -35,5 +35,3 @@ function MovieItem({ title, description, url }: MovieProps) {
     </Card>
   );
 }
-
-export default MovieItem;
