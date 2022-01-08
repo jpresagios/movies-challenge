@@ -3,6 +3,8 @@ import MovieList from '../components/MovieList';
 
 export default function MovieContainer() {
   return (
-    <MovieList />
+    <div style={{ padding: 40 }}>
+      <MovieList />
+    </div>
   );
 }
