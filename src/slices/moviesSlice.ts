@@ -9,12 +9,16 @@ export type AppThunk = ThunkAction<void, MovieState, unknown, Action<string>>;
 
 export interface MovieState {
   movies: Movie[];
+  sortFields: any;
+  searchFields: any;
   loading: boolean;
   errors: string;
 }
 
 const initialState: MovieState = {
   movies: [],
+  sortFields: { field: 'releaseYear', order: 'desc' },
+  searchFields: { year: 0, type: '' },
   loading: false,
   errors: '',
 };
@@ -26,7 +30,6 @@ const photoSlice = createSlice({
     setLoading: (state, { payload }: PayloadAction<boolean>) => {
       state.loading = payload;
     },
-
     setErrors: (state, { payload }: PayloadAction<string>) => {
       state.errors = payload;
     },
@@ -34,10 +37,16 @@ const photoSlice = createSlice({
     setMovies: (state, { payload }: PayloadAction<Movie[]>) => {
       state.movies = payload;
     },
+    setSearchFields: (state, { payload }: PayloadAction<any>) => {
+      const { name, value } = payload;
+      state.searchFields[name] = value;
+    },
   },
 });
 
-export const { setLoading, setErrors, setMovies } = photoSlice.actions;
+export const {
+  setLoading, setErrors, setMovies, setSearchFields,
+} = photoSlice.actions;
 
 export default photoSlice.reducer;
 
