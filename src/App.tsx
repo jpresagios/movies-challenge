@@ -1,9 +1,13 @@
 import React from 'react';
 import MovieContainer from './pages/movies/containers/MovieContainer';
+import NavBar from './pages/common/NavBar';
 
 function App() {
   return (
-    <MovieContainer />
+    <>
+      <NavBar />
+      <MovieContainer />
+    </>
   );
 }
 
