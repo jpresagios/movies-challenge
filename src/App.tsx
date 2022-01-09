@@ -1,13 +1,24 @@
 import React from 'react';
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+} from 'react-router-dom';
 import MovieContainer from './pages/movies/containers/MovieContainer';
 import NavBar from './pages/common/NavBar';
+import LoginContainer from './pages/auth/containers/LoginContainer';
 
 function App() {
   return (
-    <>
-      <NavBar />
-      <MovieContainer />
-    </>
+    <Router>
+      <div id="public-route">
+        <NavBar />
+        <Routes>
+          <Route path="/" element={<MovieContainer />} />
+          <Route path="/login" element={<LoginContainer />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
