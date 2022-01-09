@@ -1,6 +1,7 @@
 import { CircularProgress, Grid } from '@material-ui/core';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import MovieItem from './MovieItem';
 import Movie from '../../../interfaces/movie';
 import { getMovies, moviesSelector } from '../../../state/slices/moviesSlice';
@@ -32,11 +33,13 @@ export default function MovieList() {
           <Grid container spacing={4}>
             {movies?.map((item: Movie) => (
               <Grid item xs={12} sm={6} md={4} lg={3} key={item._id}>
-                <MovieItem
-                  title={item.title}
-                  description={item.description}
-                  url={item.images.posterArt.url}
-                />
+                <Link to={`movie/${item._id}`} style={{ textDecoration: 'none' }}>
+                  <MovieItem
+                    title={item.title}
+                    description={item.description}
+                    url={item.images.posterArt.url}
+                  />
+                </Link>
               </Grid>
             ))}
           </Grid>
