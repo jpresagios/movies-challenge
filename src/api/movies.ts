@@ -26,4 +26,12 @@ const fetchMovies = async (
   return data;
 };
 
+const fetchMovieDetail = async (
+  id: number,
+): Promise<Movie> => {
+  const { data } = await axios.get(`/movies/${id}`);
+  return data;
+};
+
 export default fetchMovies;
+export { fetchMovieDetail };
