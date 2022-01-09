@@ -7,6 +7,7 @@ export default interface MovieStore {
 }
 
 export interface MovieState {
+  movieDetail?: Movie;
   movies: Movie[];
   sortFields: SortFields;
   searchFields: SearchFields;
