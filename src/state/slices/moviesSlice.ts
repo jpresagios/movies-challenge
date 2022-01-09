@@ -22,7 +22,7 @@ export const getMovies = createAsyncThunk<Movie[]>(
 const initialState: MovieState = {
   movies: [],
   sortFields: { field: 'releaseYear', order: 'desc' },
-  searchFields: { year: 2015, type: '' },
+  searchFields: { year: 0, type: '' },
   loadingMovies: false,
   errors: '',
 };
