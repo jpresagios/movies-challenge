@@ -31,7 +31,7 @@ export default function MovieList() {
           <MovieSearch />
           <Grid container spacing={4}>
             {movies?.map((item: Movie) => (
-              <Grid item xs={12} sm={6} md={3} key={item._id}>
+              <Grid item xs={12} sm={6} md={4} lg={3} key={item._id}>
                 <MovieItem
                   title={item.title}
                   description={item.description}
