@@ -1,5 +1,6 @@
 import Movie from '../../interfaces/movie';
 import SearchFields from '../../interfaces/searchFields';
+import SortFields from '../../interfaces/sortFields';
 
 export default interface MovieStore {
   movieStore: MovieState;
@@ -7,7 +8,7 @@ export default interface MovieStore {
 
 export interface MovieState {
   movies: Movie[];
-  sortFields: any;
+  sortFields: SortFields;
   searchFields: SearchFields;
   loading: boolean;
   errors: string;
