@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import MenuIcon from '@material-ui/icons/Menu';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,7 +37,9 @@ export default function UserLayout() {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" className={classes.title}>
-              Movies App
+              <Link to="/" style={{ color: 'white' }}>
+                Home
+              </Link>
             </Typography>
             <Typography variant="h6"> Welcome</Typography>
             <IconButton
