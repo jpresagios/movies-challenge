@@ -8,3 +8,10 @@ test('Movie Item render with the title provide as prop', () => {
   const movieItem = screen.getByText(titleMovie);
   expect(movieItem).toBeInTheDocument();
 });
+
+test('Movie Item render with the description provide as prop', () => {
+  const descriptionMovie = 'Description movie';
+  render(<MovieItem title="Title movie" description={descriptionMovie} url="url movie" />);
+  const movieItem = screen.getByText(descriptionMovie);
+  expect(movieItem).toBeInTheDocument();
+});
