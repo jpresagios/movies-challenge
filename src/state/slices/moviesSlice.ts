@@ -5,7 +5,7 @@ import {
 } from '@reduxjs/toolkit';
 import Movie from '../../interfaces/movie';
 
-import fetchMovies from '../../api/movies';
+import fetchMovies, { fetchMovieDetail } from '../../api/movies';
 import MovieStore, { MovieState } from '../interfaces/movie';
 
 export const getMovies = createAsyncThunk<Movie[]>(
@@ -41,6 +41,9 @@ const movieSlice = createSlice({
     setMovies: (state, { payload }: PayloadAction<Movie[]>) => {
       state.movies = payload;
     },
+    setMovieDetail: (state, { payload }: PayloadAction<any>) => {
+      state.movieDetail = payload;
+    },
     setSearchFields: (state, { payload }: PayloadAction<any>) => {
       const { name, value } = payload;
       state.searchFields[name] = value;
@@ -65,7 +68,14 @@ const movieSlice = createSlice({
 export default movieSlice.reducer;
 
 export const {
-  setLoading, setErrors, setMovies, setSearchFields, setSortField,
+  setLoading, setErrors, setMovies, setSearchFields, setSortField, setMovieDetail,
 } = movieSlice.actions;
+
+export const getMovieDetail = (data: any) => async (dispatch: any) => {
+  const { id } = data;
+  const res = await fetchMovieDetail(id);
+
+  dispatch(setMovieDetail(res));
+};
 
 export const moviesSelector = (state: { movieStore: MovieState }) => state.movieStore;
