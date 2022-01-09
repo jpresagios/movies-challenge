@@ -2,16 +2,17 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import MovieItem from '../../pages/movies/components/MovieItem';
 
-test('Movie Item render with the title provide as prop', () => {
-  const titleMovie = 'Title movie';
-  render(<MovieItem title={titleMovie} description="Description movie" url="url movie" />);
-  const movieItem = screen.getByText(titleMovie);
-  expect(movieItem).toBeInTheDocument();
+interface Text {
+  text: string;
+}
+
+jest.mock('react-text-truncate', () => function truncate({ text }: Text) {
+  return <div>{text}</div>;
 });
 
-test('Movie Item render with the description provide as prop', () => {
-  const descriptionMovie = 'Description movie';
-  render(<MovieItem title="Title movie" description={descriptionMovie} url="url movie" />);
-  const movieItem = screen.getByText(descriptionMovie);
+test('Movie Item render with the title provide as prop', () => {
+  const titleMovie = 'Title movie';
+  render(<MovieItem title={titleMovie} url="url movie" />);
+  const movieItem = screen.getByText(titleMovie);
   expect(movieItem).toBeInTheDocument();
 });
