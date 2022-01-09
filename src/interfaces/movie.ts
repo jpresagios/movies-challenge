@@ -3,4 +3,5 @@ export default interface Movie {
   title: string;
   images: { posterArt: { url: string } };
   description: string;
+  releaseYear: number;
 }
