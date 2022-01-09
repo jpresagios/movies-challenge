@@ -3,10 +3,10 @@ import {
   PayloadAction,
   createAsyncThunk,
 } from '@reduxjs/toolkit';
-import Movie from '../interfaces/movie';
+import Movie from '../../interfaces/movie';
 
-import fetchMovies from '../api/movies';
-import SearchFields from '../interfaces/searchFields';
+import fetchMovies from '../../api/movies';
+import MovieStore, { MovieState } from '../interfaces/movie';
 
 export const getMovies = createAsyncThunk<Movie[]>(
   'fetch/movies',
@@ -19,22 +19,10 @@ export const getMovies = createAsyncThunk<Movie[]>(
   },
 );
 
-export interface MovieStore {
-  movieStore: MovieState;
-}
-
-export interface MovieState {
-  movies: Movie[];
-  sortFields: any;
-  searchFields: SearchFields;
-  loading: boolean;
-  errors: string;
-}
-
 const initialState: MovieState = {
   movies: [],
   sortFields: { field: 'releaseYear', order: 'desc' },
-  searchFields: { year: 0, type: '' },
+  searchFields: { year: 2015, type: '' },
   loading: false,
   errors: '',
 };

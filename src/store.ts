@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import movieSlice from './slices/moviesSlice';
+import movieSlice from './state/slices/moviesSlice';
 
 const composedEnhancer = composeWithDevTools(applyMiddleware(thunk));
 
