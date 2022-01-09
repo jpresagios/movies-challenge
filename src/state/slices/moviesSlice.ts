@@ -12,9 +12,9 @@ export const getMovies = createAsyncThunk<Movie[]>(
   'fetch/movies',
   async (_, thunkAPI) => {
     const state: MovieStore = <MovieStore>thunkAPI.getState();
-    const { movieStore: { searchFields } } = state;
+    const { movieStore: { searchFields, sortFields } } = state;
 
-    const res = await fetchMovies(searchFields);
+    const res = await fetchMovies(searchFields, sortFields);
     return res;
   },
 );
@@ -45,6 +45,11 @@ const movieSlice = createSlice({
       const { name, value } = payload;
       state.searchFields[name] = value;
     },
+    setSortField: (state, { payload }: PayloadAction<any>) => {
+      const { field, order } = payload;
+      state.sortFields.field = field;
+      state.sortFields.order = order;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(getMovies.fulfilled, (state, action) => {
@@ -56,7 +61,7 @@ const movieSlice = createSlice({
 export default movieSlice.reducer;
 
 export const {
-  setLoading, setErrors, setMovies, setSearchFields,
+  setLoading, setErrors, setMovies, setSearchFields, setSortField,
 } = movieSlice.actions;
 
 export const moviesSelector = (state: { movieStore: MovieState }) => state.movieStore;
