@@ -1,16 +1,25 @@
-import { createSlice, PayloadAction, Action } from '@reduxjs/toolkit';
-import { ThunkAction } from 'redux-thunk';
+import {
+  createSlice,
+  PayloadAction,
+  createAsyncThunk,
+} from '@reduxjs/toolkit';
 import Movie from '../interfaces/movie';
 
 import fetchMovies from '../api/movies';
+import SearchFields from '../interfaces/searchFields';
 
-// The AppThunk type will help us in writing type definitions for thunk actions
-export type AppThunk = ThunkAction<void, MovieState, unknown, Action<string>>;
+export const getMovies = createAsyncThunk<Movie[]>(
+  'fetch/movies',
+  async () => {
+    const res = await fetchMovies();
+    return res;
+  },
+);
 
 export interface MovieState {
   movies: Movie[];
   sortFields: any;
-  searchFields: any;
+  searchFields: SearchFields;
   loading: boolean;
   errors: string;
 }
@@ -18,12 +27,12 @@ export interface MovieState {
 const initialState: MovieState = {
   movies: [],
   sortFields: { field: 'releaseYear', order: 'desc' },
-  searchFields: { year: 0, type: '' },
+  searchFields: { year: 2015, type: '' },
   loading: false,
   errors: '',
 };
 
-const photoSlice = createSlice({
+const movieSlice = createSlice({
   name: 'movies',
   initialState,
   reducers: {
@@ -42,24 +51,17 @@ const photoSlice = createSlice({
       state.searchFields[name] = value;
     },
   },
+  extraReducers: (builder) => {
+    builder.addCase(getMovies.fulfilled, (state, action) => {
+      state.movies = action.payload;
+    });
+  },
 });
+
+export default movieSlice.reducer;
 
 export const {
   setLoading, setErrors, setMovies, setSearchFields,
-} = photoSlice.actions;
-
-export default photoSlice.reducer;
+} = movieSlice.actions;
 
 export const moviesSelector = (state: { movieStore: MovieState }) => state.movieStore;
-
-export const getMovies = (): AppThunk => async (dispatch) => {
-  dispatch(setLoading(true));
-  try {
-    const res = await fetchMovies();
-
-    dispatch(setLoading(false));
-    dispatch(setMovies(res));
-  } catch (e) {
-    dispatch(setLoading(false));
-  }
-};
