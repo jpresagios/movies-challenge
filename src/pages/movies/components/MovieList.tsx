@@ -37,7 +37,6 @@ export default function MovieList({ loadingMovies, movies }: MovieListProps) {
                 >
                   <MovieItem
                     title={item.title}
-                    description={item.description}
                     url={item.images.posterArt.url}
                   />
                 </Link>
