@@ -1,18 +1,24 @@
 import {
   Card,
-  CardContent,
   CardHeader,
+  CardContent,
   CardMedia,
   Typography,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
+import TextTruncate from 'react-text-truncate';
 import MovieProps from '../interfaces/MovieProps';
 
 const useStyles = makeStyles(() => ({
   media: {
     height: 0,
     paddingTop: '60.25%', // 16:9
+  },
+  truncate: {
+    display: '-webkit-box',
+    '-webkitLineClamp': 1,
+    '-webkitBoxOrient': 'vertical',
   },
 }));
 
@@ -21,7 +27,13 @@ export default function MovieItem({ title, description, url }: MovieProps) {
 
   return (
     <Card>
-      <CardHeader title={title} titleTypographyProps={{ variant: 'h6' }} />
+      <CardHeader title={(
+        <TextTruncate
+          line={1}
+          text={title}
+        />
+)}
+      />
       <CardMedia
         className={classes.media}
         image={url}
