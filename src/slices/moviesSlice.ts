@@ -10,11 +10,18 @@ import SearchFields from '../interfaces/searchFields';
 
 export const getMovies = createAsyncThunk<Movie[]>(
   'fetch/movies',
-  async () => {
-    const res = await fetchMovies();
+  async (_, thunkAPI) => {
+    const state: MovieStore = <MovieStore>thunkAPI.getState();
+    const { movieStore: { searchFields } } = state;
+
+    const res = await fetchMovies(searchFields);
     return res;
   },
 );
+
+export interface MovieStore {
+  movieStore: MovieState;
+}
 
 export interface MovieState {
   movies: Movie[];
@@ -27,7 +34,7 @@ export interface MovieState {
 const initialState: MovieState = {
   movies: [],
   sortFields: { field: 'releaseYear', order: 'desc' },
-  searchFields: { year: 2015, type: '' },
+  searchFields: { year: 0, type: '' },
   loading: false,
   errors: '',
 };
