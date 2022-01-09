@@ -3,19 +3,21 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import MovieItem from './MovieItem';
 import Movie from '../../../interfaces/movie';
-import { getMovies, moviesSelector } from '../../../slices/moviesSlice';
+import { getMovies, moviesSelector } from '../../../state/slices/moviesSlice';
 import MovieSearch from './MovieSearch';
+import MovieSort from './MovieSort';
 
 export default function MovieList() {
-  const { movies } = useSelector(moviesSelector);
+  const { movies, searchFields, sortFields } = useSelector(moviesSelector);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getMovies());
-  }, [dispatch]);
+  }, [dispatch, searchFields, sortFields]);
 
   return (
     <>
+      <MovieSort />
       <MovieSearch />
       <Grid container spacing={4}>
         {movies?.map((item: Movie) => (
