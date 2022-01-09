@@ -15,11 +15,6 @@ const useStyles = makeStyles(() => ({
     height: 0,
     paddingTop: '60.25%', // 16:9
   },
-  truncate: {
-    display: '-webkit-box',
-    '-webkitLineClamp': 1,
-    '-webkitBoxOrient': 'vertical',
-  },
 }));
 
 export default function MovieItem({ title, description, url }: MovieProps) {
