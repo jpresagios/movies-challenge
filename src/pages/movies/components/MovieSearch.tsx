@@ -18,7 +18,7 @@ import {
 
 import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch, useSelector } from 'react-redux';
-import { moviesSelector, setSearchFields } from '../../../slices/moviesSlice';
+import { moviesSelector, setSearchFields } from '../../../state/slices/moviesSlice';
 
 const useStyles = makeStyles((theme) => ({
   modal: {
