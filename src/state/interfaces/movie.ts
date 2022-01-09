@@ -10,6 +10,6 @@ export interface MovieState {
   movies: Movie[];
   sortFields: SortFields;
   searchFields: SearchFields;
-  loading: boolean;
+  loadingMovies: boolean;
   errors: string;
 }

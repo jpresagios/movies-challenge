@@ -23,7 +23,7 @@ const initialState: MovieState = {
   movies: [],
   sortFields: { field: 'releaseYear', order: 'desc' },
   searchFields: { year: 2015, type: '' },
-  loading: false,
+  loadingMovies: false,
   errors: '',
 };
 
@@ -32,7 +32,7 @@ const movieSlice = createSlice({
   initialState,
   reducers: {
     setLoading: (state, { payload }: PayloadAction<boolean>) => {
-      state.loading = payload;
+      state.loadingMovies = payload;
     },
     setErrors: (state, { payload }: PayloadAction<string>) => {
       state.errors = payload;
@@ -54,6 +54,10 @@ const movieSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getMovies.fulfilled, (state, action) => {
       state.movies = action.payload;
+      state.loadingMovies = false;
+    });
+    builder.addCase(getMovies.pending, (state) => {
+      state.loadingMovies = true;
     });
   },
 });
