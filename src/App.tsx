@@ -7,6 +7,7 @@ import {
 import MovieContainer from './pages/movies/containers/MovieContainer';
 import NavBar from './pages/common/NavBar';
 import LoginContainer from './pages/auth/containers/LoginContainer';
+import MovieDetail from './pages/movies/components/MovieDetail';
 
 function App() {
   return (
@@ -15,6 +16,12 @@ function App() {
         <NavBar />
         <Routes>
           <Route path="/" element={<MovieContainer />} />
+          <Route
+            path="/movie/:id"
+            element={
+              <MovieDetail />
+}
+          />
           <Route path="/login" element={<LoginContainer />} />
         </Routes>
       </div>
