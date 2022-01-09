@@ -1,9 +1,7 @@
 import {
   Card,
   CardHeader,
-  CardContent,
   CardMedia,
-  Typography,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
@@ -17,7 +15,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export default function MovieItem({ title, description, url }: MovieProps) {
+export default function MovieItem({ title, url }: MovieProps) {
   const classes = useStyles();
 
   return (
@@ -30,15 +28,11 @@ export default function MovieItem({ title, description, url }: MovieProps) {
 )}
       />
       <CardMedia
+        style={{ backgroundPosition: 'top', height: '35vh' }}
         className={classes.media}
         image={url}
         title={title}
       />
-      <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-          {description}
-        </Typography>
-      </CardContent>
     </Card>
   );
 }

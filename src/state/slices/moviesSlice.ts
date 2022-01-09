@@ -73,9 +73,11 @@ export const {
 
 export const getMovieDetail = (data: any) => async (dispatch: any) => {
   const { id } = data;
-  const res = await fetchMovieDetail(id);
 
+  dispatch(setLoading(true));
+  const res = await fetchMovieDetail(id);
   dispatch(setMovieDetail(res));
+  dispatch(setLoading(false));
 };
 
 export const moviesSelector = (state: { movieStore: MovieState }) => state.movieStore;
