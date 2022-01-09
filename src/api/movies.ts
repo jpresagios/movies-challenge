@@ -10,7 +10,7 @@ const fetchMovies = async (
   const { type, year } = searchFields;
   const { field, order } = sortFields;
 
-  let url = `?_sort=${field}&_order=${order}`;
+  let url = `/movies?_sort=${field}&_order=${order}`;
 
   const additionalFilter = [{ fieldFilter: 'programType', valueFilter: type }, { field: 'releaseYear', value: year }];
 
