@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: process.env.REACT_APP_MOVIE_API_URL,
+  baseURL: 'https://sideproject-movies-api.herokuapp.com/',
 });
 
 export default instance;
