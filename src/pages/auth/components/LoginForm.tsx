@@ -62,7 +62,7 @@ export default function LoginForm() {
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <TextField
-              variant="outlined"
+              variant="standard"
               required
               fullWidth
               label="Email Address"
@@ -80,7 +80,7 @@ export default function LoginForm() {
           </Grid>
           <Grid item xs={12}>
             <TextField
-              variant="outlined"
+              variant="standard"
               required
               fullWidth
               name="password"
@@ -111,7 +111,7 @@ export default function LoginForm() {
 
         <Grid container justifyContent="flex-end">
           <Grid item>
-            <Link component={LinkRDom} to="/register" variant="body2">
+            <Link component={LinkRDom} to="/signUp" variant="body2">
               Use following link to Sign Up
             </Link>
           </Grid>
