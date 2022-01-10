@@ -48,6 +48,9 @@ const movieSlice = createSlice({
       const { name, value } = payload;
       state.searchFields[name] = value;
     },
+    cleanSearchFilter: (state) => {
+      state.searchFields = { year: 0, type: '' };
+    },
     setSortField: (state, { payload }: PayloadAction<any>) => {
       const { field, order } = payload;
       state.sortFields.field = field;
@@ -69,6 +72,7 @@ export default movieSlice.reducer;
 
 export const {
   setLoading, setErrors, setMovies, setSearchFields, setSortField, setMovieDetail,
+  cleanSearchFilter
 } = movieSlice.actions;
 
 export const getMovieDetail = (data: any) => async (dispatch: any) => {
