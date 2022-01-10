@@ -7,7 +7,21 @@ const fetchUser = async (
   const { data } = await axios.post('/login', userData);
 
   const result: UserResponse = {
-    token: data.accessToken,
+    email: data.user.email,
+    name: data.user.name,
+  };
+
+  localStorage.setItem('token', data.accessToken);
+
+  return result;
+};
+
+export const registerUser = async (
+  userData: User,
+): Promise<UserResponse> => {
+  const { data } = await axios.post('/signup', userData);
+
+  const result: UserResponse = {
     email: data.user.email,
     name: data.user.name,
   };
