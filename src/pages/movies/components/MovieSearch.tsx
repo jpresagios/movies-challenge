@@ -14,11 +14,12 @@ import {
   MenuItem,
   Modal,
   IconButton,
+  Button,
 } from '@material-ui/core';
 
 import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch, useSelector } from 'react-redux';
-import { moviesSelector, setSearchFields } from '../../../state/slices/moviesSlice';
+import { cleanSearchFilter, moviesSelector, setSearchFields } from '../../../state/slices/moviesSlice';
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -72,6 +73,10 @@ export default function MovieSearch() {
 
   const onRequestYearChange = (e: any) => {
     dispatch(setSearchFields({ name: 'year', value: e.getFullYear() }));
+  };
+
+  const cleanFilter = () => {
+    dispatch(cleanSearchFilter());
   };
 
   return (
@@ -138,6 +143,10 @@ export default function MovieSearch() {
                     />
                   </MuiPickersUtilsProvider>
                 </FormControl>
+
+                <Button type="submit" variant="outlined" color="secondary" onClick={cleanFilter}>
+                  Clean filter
+                </Button>
               </Grid>
             </Grid>
           </form>
