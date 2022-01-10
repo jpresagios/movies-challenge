@@ -1,7 +1,7 @@
 export default interface User {
   email: string;
   name: string;
-  password?: string;
+  [key: string]: any;
 }
 
 export interface UserResponse {
