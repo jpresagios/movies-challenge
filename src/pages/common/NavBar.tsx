@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function UserLayout() {
+export default function NavBar() {
   const classes = useStyles();
 
   const {
