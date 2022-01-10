@@ -2,6 +2,7 @@ import {
   createSlice,
   PayloadAction,
 } from '@reduxjs/toolkit';
+import Swal from 'sweetalert2';
 import fetchUser, { registerUser } from '../../api/auth';
 
 import { AuthState } from '../interfaces/auth';
@@ -28,9 +29,13 @@ export const {
 } = authlice.actions;
 
 export const loginUser = (data: any, history: any) => async (dispatch: any) => {
-  const res = await fetchUser(data);
-  dispatch(setUser(res));
-  history('/');
+  try {
+    const res = await fetchUser(data);
+    dispatch(setUser(res));
+    history('/');
+  } catch (error) {
+    Swal.fire('Info', 'Check user credentials', 'error');
+  }
 };
 
 export const signUpUser = (data: any, history: any) => async (dispatch: any) => {
