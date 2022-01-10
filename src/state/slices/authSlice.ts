@@ -2,9 +2,9 @@ import {
   createSlice,
   PayloadAction,
 } from '@reduxjs/toolkit';
-import fetchUser from '../../api/auth';
+import fetchUser, { registerUser } from '../../api/auth';
 
-import AuthStore, { AuthState } from '../interfaces/auth';
+import { AuthState } from '../interfaces/auth';
 
 const initialState: AuthState = {
   user: { email: '', name: '' },
@@ -27,10 +27,16 @@ export const {
   setUser,
 } = authlice.actions;
 
-export const authSelector = (state: { authStore: AuthStore }) => state.authStore;
-
 export const loginUser = (data: any, history: any) => async (dispatch: any) => {
   const res = await fetchUser(data);
   dispatch(setUser(res));
   history('/');
 };
+
+export const signUpUser = (data: any, history: any) => async (dispatch: any) => {
+  const res = await registerUser(data);
+  dispatch(setUser(res));
+  history('/login');
+};
+
+export const authSelector = (state: { authStore: AuthState }) => state.authStore;
