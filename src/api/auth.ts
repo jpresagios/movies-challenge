@@ -19,7 +19,10 @@ const fetchUser = async (
 export const registerUser = async (
   userData: User,
 ): Promise<UserResponse> => {
-  const { data } = await axios.post('/signup', userData);
+  const { name, password, email } = userData;
+
+  const bodyPost = { name, password, email };
+  const { data } = await axios.post('/signup', bodyPost);
 
   const result: UserResponse = {
     email: data.user.email,
