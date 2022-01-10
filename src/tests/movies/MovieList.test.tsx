@@ -16,6 +16,9 @@ jest.mock('react-text-truncate', () => function truncate({ text }: Text) {
   return <div>{text}</div>;
 });
 
+// mock jwt-decode to authenticate the user
+jest.mock('jwt-decode', () => () => ({ exp: 111111111111111 }));
+
 test('Movie List render all the movies', () => {
   const initState = {
     movieStore: {
