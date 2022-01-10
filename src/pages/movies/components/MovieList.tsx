@@ -1,5 +1,4 @@
 import { CircularProgress, Grid } from '@material-ui/core';
-import { Link } from 'react-router-dom';
 import React from 'react';
 import MovieItem from './MovieItem';
 import Movie from '../../../interfaces/movie';
@@ -31,15 +30,12 @@ export default function MovieList({ loadingMovies, movies }: MovieListProps) {
           <Grid container spacing={4}>
             {movies?.map((item: Movie) => (
               <Grid item xs={12} sm={12} md={6} lg={3} key={item._id}>
-                <Link
-                  to={`movie/${item._id}`}
-                  style={{ textDecoration: 'none' }}
-                >
-                  <MovieItem
-                    title={item.title}
-                    url={item.images.posterArt.url}
-                  />
-                </Link>
+
+                <MovieItem
+                  title={item.title}
+                  url={item.images.posterArt.url}
+                />
+
               </Grid>
             ))}
           </Grid>

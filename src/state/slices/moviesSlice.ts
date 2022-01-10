@@ -72,7 +72,7 @@ export default movieSlice.reducer;
 
 export const {
   setLoading, setErrors, setMovies, setSearchFields, setSortField, setMovieDetail,
-  cleanSearchFilter
+  cleanSearchFilter,
 } = movieSlice.actions;
 
 export const getMovieDetail = (data: any) => async (dispatch: any) => {

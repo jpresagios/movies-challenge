@@ -7,7 +7,6 @@ import {
 import MovieContainer from './pages/movies/containers/MovieContainer';
 import NavBar from './pages/common/NavBar';
 import LoginContainer from './pages/auth/containers/LoginContainer';
-import MovieDetail from './pages/movies/components/MovieDetail';
 import RegisterContainer from './pages/auth/containers/RegisterContainer';
 import PrivateRoute from './routes/PrivateRoute';
 
@@ -17,12 +16,6 @@ function App() {
       <div id="public-route">
         <NavBar />
         <Routes>
-          <Route
-            path="/movie/:id"
-            element={
-              <MovieDetail />
-}
-          />
           <Route path="/login" element={<LoginContainer />} />
           <Route path="/signUp" element={<RegisterContainer />} />
           <Route
