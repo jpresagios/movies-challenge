@@ -6,7 +6,9 @@ import Typography from '@material-ui/core/Typography';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import MenuIcon from '@material-ui/icons/Menu';
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { authSelector } from '../../state/slices/authSlice';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,6 +24,10 @@ const useStyles = makeStyles((theme) => ({
 
 export default function UserLayout() {
   const classes = useStyles();
+
+  const {
+    user,
+  } = useSelector(authSelector);
 
   return (
     <div>
@@ -41,7 +47,11 @@ export default function UserLayout() {
                 Home
               </Link>
             </Typography>
-            <Typography variant="h6"> Welcome</Typography>
+            <Typography variant="h6">
+              Welcome
+              {' '}
+              {user.name}
+            </Typography>
             <IconButton
               arial-label="exit-button"
               color="inherit"
