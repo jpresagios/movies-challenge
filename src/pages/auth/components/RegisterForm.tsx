@@ -138,7 +138,7 @@ export default function RegisterForm() {
           <Grid container justifyContent="flex-end">
             <Grid item>
               <Button type="submit" variant="outlined" color="secondary">
-                Sign in
+                Sign up
               </Button>
             </Grid>
           </Grid>
