@@ -9,7 +9,6 @@ import { AuthState } from '../interfaces/auth';
 
 const initialState: AuthState = {
   user: { email: '', name: '' },
-  loadingUser: false,
 };
 
 const authlice = createSlice({
@@ -30,9 +29,10 @@ export const {
 
 export const loginUser = (data: any, history: any) => async (dispatch: any) => {
   try {
-    const res = await fetchUser(data);
+    const res = await fetchUser(data);    
     dispatch(setUser(res));
-    history('/');
+
+    if (history) history('/');
   } catch (error) {
     Swal.fire('Info', 'Check user credentials', 'error');
   }
