@@ -21,6 +21,9 @@ jest.mock('jwt-decode', () => () => ({ exp: 111111111111111 }));
 
 test('Movie List render all the movies', () => {
   const initState = {
+    authStore: {
+      user: { name: '' },
+    },
     movieStore: {
       movies: moviesMock,
       sortFields: { field: 'releaseYear', order: 'desc' },
