@@ -29,7 +29,7 @@ export const {
 
 export const loginUser = (data: any, history: any) => async (dispatch: any) => {
   try {
-    const res = await fetchUser(data);    
+    const res = await fetchUser(data);
     dispatch(setUser(res));
 
     if (history) history('/');
